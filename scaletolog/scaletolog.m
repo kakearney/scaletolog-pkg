@@ -30,10 +30,11 @@ function [xs, tk, tksc] = scaletolog(x, varargin)
 
 % Copyright 2012 Kelly Kearney
 
-Opt.prc = [];
-Opt.center = false;
-
-Opt = parsepv(Opt, varargin);
+p = inputParser;
+p.addParameter('prc', []);
+p.addParameter('center', false);
+p.parse(varargin{:});
+Opt = p.Results;
 
 if ~isempty(Opt.prc)
     centerval = prctile(log10(abs(x(:))), Opt.prc);
